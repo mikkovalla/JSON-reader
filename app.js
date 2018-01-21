@@ -14,13 +14,29 @@ let clueSearcher = (uri) => {
   .then((resp) => resp.json())
     .then(function(data){
       datapoint = data.next
+      if(datapoint === "/auth"){
+        //document.getElementById("vika").innerHTML = url + datapoint
+        //console.log(url + datapoint)
+        fetch(url + datapoint, {
+          headers: {
+            'Authorization': 'Basic QVRSUjpQT1JS'
+          }
+        })
+        .then((resp)=> resp.json())
+          .then(function(data){
+            console.log(data)
+          })
+        return
+      }
       console.log(datapoint)
 
-      if(datapoint !== "/auth")
       document.getElementById("nextOne").innerHTML = numb++
       clueSearcher(url + datapoint)
 
     })
-    //Seuraavaksi /auth polun tunnistautuminen
+    
 }
+
+
+//Seuraavaksi /auth polun tunnistautuminen --> ATRR/PORR -> /challenge *as HTML*
 
